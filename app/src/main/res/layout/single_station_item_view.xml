@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/layout_padding"
+    android:paddingTop="@dimen/layout_padding">
+
+    <TextView
+        android:id="@+id/idNum"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:textColor="@color/light_grey"
+        android:textSize="21sp"
+        android:textStyle="normal" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/small_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_toEndOf="@id/idNum"
+        android:layout_toRightOf="@id/idNum" />
+
+    <LinearLayout
+        android:id="@+id/linLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/small_image"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/list_item_horizontal_padding"
+        android:paddingRight="@dimen/list_item_horizontal_padding">
+
+        <TextView
+            android:id="@+id/mainText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/subText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</merge>

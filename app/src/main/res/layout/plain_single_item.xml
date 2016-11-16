@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/plain_elem_margin"
+    android:layout_marginRight="@dimen/plain_elem_margin"
+    android:layout_marginTop="@dimen/plain_elem_margin"
+    android:background="@drawable/plain_item"
+    android:elevation="2dp"
+    android:paddingEnd="@dimen/list_item_margin_horizontal"
+    android:paddingStart="@dimen/list_item_margin_horizontal"
+    >
+
+
+    <TextView
+        android:id="@+id/idNum"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:textColor="@color/light_grey"
+        android:textSize="21sp"
+        android:textStyle="normal" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/small_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_toEndOf="@id/idNum"
+        android:layout_toRightOf="@id/idNum" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/small_image"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/list_item_horizontal_padding"
+        android:paddingRight="@dimen/list_item_horizontal_padding">
+
+        <TextView
+            android:id="@+id/mainText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/subText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_grey"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/arrow_right"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:background="#0FFF"-->
+        <!--android:src="@drawable/arrow_right" />-->
+
+</RelativeLayout>

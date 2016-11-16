@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomItem">
+        <attr name="mainTextColor" format="color"/>
+        <attr name="mainTextStyle" format="integer"/>
+        <attr name="subTextColor" format="color"/>
+
+    </declare-styleable>
+</resources>
