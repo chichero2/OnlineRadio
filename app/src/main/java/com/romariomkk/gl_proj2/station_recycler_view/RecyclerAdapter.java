@@ -6,10 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.romariomkk.gl_proj2.R;
-import com.romariomkk.gl_proj2.station.StationModel;
+import com.romariomkk.gl_proj2.top_stations.StationModel;
 
 import java.util.ArrayList;
 
@@ -18,6 +17,14 @@ import java.util.ArrayList;
  */
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
+    private final int HEADER_ITEM = 0;
+    private final int PLAIN_ITEM = 1;
+
+    Context context;
+    ArrayList<StationModel> stations;
+    private OnItemClickListener clickListener;
+
+
     public interface OnItemClickListener{
         void onItemClicked(StationModel station);
     }
@@ -25,27 +32,30 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView image;
-        ImageView smallImage;
-        TextView idText;
-        TextView mainText;
-        TextView subText;
+        CustomItem item;
 
         public ViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.image);
-            smallImage = (ImageView) itemView.findViewById(R.id.small_image);
-            idText = (TextView) itemView.findViewById(R.id.idNum);
-            mainText = (TextView) itemView.findViewById(R.id.mainText);
-            subText = (TextView) itemView.findViewById(R.id.subText);
+            item = (CustomItem) itemView.findViewById(R.id.customItem);
+        }
+
+        void setModel(StationModel station, int position){
+
+            boolean isFirst = RecyclerAdapter.this.getItemViewType(position) == HEADER_ITEM;
+            if (isFirst) {
+                image.setImageResource(station.getImageID());
+            }
+            item.setStation(station, position);
+
+            itemView.setOnClickListener(view -> {
+                if (clickListener != null){
+                    clickListener.onItemClicked(station);
+                }
+            });
         }
     }
 
-    private final int HEADER_ITEM = 0;
-    private final int PLAIN_ITEM = 1;
-
-    Context context;
-    ArrayList<StationModel> stations;
-    private OnItemClickListener clickListener;
 
     public RecyclerAdapter(Context c, ArrayList<StationModel> items) {
         context = c;
@@ -79,22 +89,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         StationModel station = stations.get(position);
-
-        boolean isFirst = getItemViewType(position) == HEADER_ITEM;
-        if (isFirst) {
-            holder.image.setImageResource(station.getImageID());
-        }
-        holder.smallImage.setImageResource(station.getImageID());
-
-        holder.idText.setText(context.getString(R.string.idText, position + 1));
-        holder.mainText.setText(station.getStationName());
-        holder.subText.setText(station.getStationDescription());
-
-        holder.itemView.setOnClickListener(view -> {
-            if (clickListener != null){
-                clickListener.onItemClicked(station);
-            }
-        });
+        holder.setModel(station, position);
     }
 
     @Override

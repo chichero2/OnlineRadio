@@ -1,4 +1,4 @@
-package com.romariomkk.gl_proj2.station;
+package com.romariomkk.gl_proj2.top_stations;
 
 
 import android.app.Notification;
@@ -20,16 +20,20 @@ import com.romariomkk.gl_proj2.station_recycler_view.RecyclerAdapter;
 import java.util.ArrayList;
 
 
-public class StationsFragment extends Fragment implements RecyclerAdapter.OnItemClickListener {
+public class TOPStationsFragment extends Fragment implements RecyclerAdapter.OnItemClickListener,
+        AsyncTop500Extraction.OnLoadedListener {
 
     NotificationManager notifManager;
     View inflaterView;
     RecyclerView recyclerView;
+    RecyclerAdapter adapter;
 
-    public static StationsFragment newInstance(String name) {
+    AsyncTop500Extraction task;
+
+    public static TOPStationsFragment newInstance(String name) {
         Bundle args = new Bundle();
-        args.putString("args_name", name);
-        StationsFragment frag = new StationsFragment();
+        args.putString("title", name);
+        TOPStationsFragment frag = new TOPStationsFragment();
         frag.setArguments(args);
         return frag;
     }
@@ -52,24 +56,36 @@ public class StationsFragment extends Fragment implements RecyclerAdapter.OnItem
         Context context = inflaterView.getContext();
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        // FIXME: 16.11.2016 receive ArrayList<StationModel> from e.g. network
-        ArrayList<StationModel> objs = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            objs.add(new StationModel("StationName", "StationDescr", i == 0 ? R.drawable.img1 : R.drawable.img2));
-        }
+        task = new AsyncTop500Extraction();
+        task.setOnLoadedListener(this);
+        task.execute();
+    }
 
-        RecyclerAdapter adapter = new RecyclerAdapter(context, objs);
-
+    @Override
+    public void onLoaded(ArrayList<StationModel> models) {
+        adapter = new RecyclerAdapter(getContext(), models);
         adapter.setOnItemClickListener(this);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void onItemClicked(StationModel station) {
-        Intent intent = new Intent(getContext(), StationDetailActivity.class);
+        Intent intent = new Intent(getContext(), TOPStationDetailActivity.class);
         intent.putExtra("station_item", station);
         startActivity(intent);
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+
+
+
+
+
+
 
     private void callNotif() {
         if (notifManager == null) {
@@ -78,10 +94,10 @@ public class StationsFragment extends Fragment implements RecyclerAdapter.OnItem
         }
 
         Notification.Builder notifDraft = new Notification.Builder(getContext());
-        notifDraft.setContentTitle("LastFM player")
+        notifDraft.setContentTitle("FM player")
                 .setContentText("Current Track: ")
                 .setSmallIcon(R.drawable.ic_plus)
-                .setTicker("LastFM radio is online");
+                .setTicker("FM radio is online");
 
         Notification notif = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {

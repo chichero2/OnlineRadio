@@ -1,4 +1,4 @@
-package com.romariomkk.gl_proj2.show;
+package com.romariomkk.gl_proj2.country;
 
 
 import android.content.Context;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +16,19 @@ import com.romariomkk.gl_proj2.station_recycler_view.RecyclerAdapter;
 
 import java.util.ArrayList;
 
-public class ShowsFragment extends Fragment {
+//// TODO: 15.11.2016 LOOK AT FragmentArgs lib
+public class NowPlayingFragment extends Fragment {
+
+    public static NowPlayingFragment newInstance(String name) {
+        Bundle args = new Bundle();
+        args.putString("title", name);
+        NowPlayingFragment frag = new NowPlayingFragment();
+        frag.setArguments(args);
+        return frag;
+    }
 
     View inflaterView;
     RecyclerView recyclerView;
-
-    public static ShowsFragment newInstance(String name){
-        Bundle bundle = new Bundle();
-        bundle.putString("args_name", name);
-        ShowsFragment frag = new ShowsFragment();
-        frag.setArguments(bundle);
-        return frag;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,9 @@ public class ShowsFragment extends Fragment {
         recyclerView = (RecyclerView) inflaterView.findViewById(R.id.recyclerView);
         Context context = inflaterView.getContext();
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(new RecyclerAdapter(context, new ArrayList<>()));
+        RecyclerAdapter adapter = new RecyclerAdapter(context, new ArrayList<>());
+        adapter.setOnItemClickListener(station -> Log.d("OK", "" + station));
+        recyclerView.setAdapter(adapter);
     }
+
 }

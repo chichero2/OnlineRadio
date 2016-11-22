@@ -6,9 +6,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.romariomkk.gl_proj2.country.CountriesFragment;
-import com.romariomkk.gl_proj2.show.ShowsFragment;
-import com.romariomkk.gl_proj2.station.StationsFragment;
+import com.romariomkk.gl_proj2.country.NowPlayingFragment;
+import com.romariomkk.gl_proj2.show.GenresFragment;
+import com.romariomkk.gl_proj2.top_stations.TOPStationsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
     void setupViewPager(ViewPager viewPager){
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(StationsFragment.newInstance("STATIONS"));
-        adapter.addFragment(CountriesFragment.newInstance("COUNTRIES"));
-        adapter.addFragment(ShowsFragment.newInstance("SHOWS"));
+        adapter.addFragment(TOPStationsFragment.newInstance("TOP 500"));
+        adapter.addFragment(NowPlayingFragment.newInstance("NOW PLAYING"));
+        adapter.addFragment(GenresFragment.newInstance("GENRES"));
         viewPager.setAdapter(adapter);
     }
 
