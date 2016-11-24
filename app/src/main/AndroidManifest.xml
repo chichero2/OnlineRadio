@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".top_stations.TOPStationDetailActivity"
+            android:name=".top_stations.single.TOPStationDetailActivity"
             android:label="@string/title_activity_station"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>

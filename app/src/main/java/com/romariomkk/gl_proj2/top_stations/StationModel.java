@@ -39,6 +39,18 @@ public class StationModel implements Serializable {
         return imageID;
     }
 
+    public int getInternalId() {
+        return internalId;
+    }
+
+    public String getStationId() {
+        return stationId;
+    }
+
+    public String getCurrentAudience() {
+        return currentAudience;
+    }
+
     @Override
     public String toString() {
         return "Station: " + stationName + " " + stationGenre + " " + imageID;

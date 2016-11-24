@@ -7,8 +7,15 @@ import android.app.Application;
  */
 public class MainApplication extends Application {
 
+    private static MainApplication INSTANCE;
+
+    public static MainApplication getInstance(){
+        return INSTANCE;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+        INSTANCE = this;
     }
 }

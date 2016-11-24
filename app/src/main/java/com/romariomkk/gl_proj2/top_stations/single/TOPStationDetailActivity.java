@@ -1,4 +1,4 @@
-package com.romariomkk.gl_proj2.top_stations;
+package com.romariomkk.gl_proj2.top_stations.single;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.romariomkk.gl_proj2.R;
+import com.romariomkk.gl_proj2.top_stations.StationModel;
 
-import java.util.ArrayList;
-
-public class TOPStationDetailActivity extends AppCompatActivity implements AsyncTop500Extraction.OnLoadedListener {
+public class TOPStationDetailActivity extends AppCompatActivity{
 
     CollapsingToolbarLayout collapseToolbar;
 
@@ -33,10 +32,6 @@ public class TOPStationDetailActivity extends AppCompatActivity implements Async
         stationName.setText(station.getStationName());
         stationDescription.setText(getString(R.string.currentAud, station.getStationGenre()));
         stationImage.setImageResource(station.getImageID());
-
-        AsyncTop500Extraction task = new AsyncTop500Extraction();
-        task.setOnLoadedListener(this);
-        task.execute();
     }
 
     private void initInstances() {
@@ -47,10 +42,5 @@ public class TOPStationDetailActivity extends AppCompatActivity implements Async
         stationName = (TextView) findViewById(R.id.stationName);
         stationDescription = (TextView) findViewById(R.id.stationDescr);
         stationImage = (ImageView) findViewById(R.id.main_image);
-    }
-
-    @Override
-    public void onLoaded(ArrayList<StationModel> models) {
-
     }
 }

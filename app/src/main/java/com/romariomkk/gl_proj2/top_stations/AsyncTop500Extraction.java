@@ -14,17 +14,22 @@ import java.util.ArrayList;
 public class AsyncTop500Extraction extends AsyncTask<Integer, Void, ArrayList<StationModel>> {
     private static final String TAG = AsyncTop500Extraction.class.getSimpleName();
 
-    RequestManager requestManager = new RequestManager();
+    public interface OnLoadedListener{
+        void onLoaded(ArrayList<StationModel> models);
+    }
     ///////////////
     WeakReference<OnLoadedListener> weakLoadListener;
     //////////////
+    RequestManager requestManager = new RequestManager();
+
     @Override
     protected ArrayList<StationModel> doInBackground(Integer... ints) {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        int length = ints.length;
+        if (length == 1)
+            return requestManager.getTopStations(ints[0]);
+        if (length == 2)
+            return requestManager.getTopStations(ints[0], ints[1]);
+
         return requestManager.getTopStations();
     }
 
@@ -32,13 +37,17 @@ public class AsyncTop500Extraction extends AsyncTask<Integer, Void, ArrayList<St
     protected void onPostExecute(ArrayList<StationModel> stationModels) {
         OnLoadedListener listener = weakLoadListener.get();
         Log.d(TAG, "Listener " + listener);
-        if (listener != null){//for checking the
+        /*
+         * It has to be checked because in case of high load on the system,
+         * GC can destroy the bridge FRAGMENT <--> ASYNC_TASK (this listener is
+         * this bridge) because it's defined as a WeakReference. It can be destroyed,
+         * for example, in case when we leave activity with the fragment while the
+         * execution of Async_Task is not yet finished, or in other situation when
+         * the activity(which is thus is a priority issue for destroying by GC) becomes invisible.
+         */
+        if (listener != null){
             listener.onLoaded(stationModels);
         }
-    }
-
-    public interface OnLoadedListener{
-        void onLoaded(ArrayList<StationModel> models);
     }
 
     void setOnLoadedListener(OnLoadedListener listener){
