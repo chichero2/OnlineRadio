@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.romariomkk.gl_proj2.station_recycler_view.CustomItem xmlns:android="http://schemas.android.com/apk/res/android"
+<com.romariomkk.gl_proj2.sub_main.top_stations.station_recycler_view.CustomItem xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:id="@+id/customItem"
     android:layout_width="match_parent"
@@ -8,7 +8,7 @@
     android:layout_marginLeft="@dimen/plain_elem_margin"
     android:layout_marginRight="@dimen/plain_elem_margin"
     android:layout_marginTop="@dimen/plain_elem_margin"
-    android:background="@drawable/plain_item"
+    android:background="@drawable/plain_list_item"
     android:elevation="2dp"
     android:paddingBottom="@dimen/layout_padding"
     android:paddingEnd="@dimen/list_item_margin_horizontal"

@@ -1,4 +1,4 @@
-package com.romariomkk.gl_proj2.top_stations;
+package com.romariomkk.gl_proj2.sub_main.top_stations;
 
 import java.io.Serializable;
 

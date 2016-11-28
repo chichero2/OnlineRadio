@@ -42,11 +42,18 @@ public class XMLManager {
 
     public NodeList getTopStations(int offset, int limit) {
         StringBuilder builder = new StringBuilder();
-        builder.append(BASE_API).append(TOP_500_SEARCH).append(START_PARAMS)
-                .append(DEV_ID_PARAM).append(DEV_ID);
+        builder.append(BASE_API)
+                .append(TOP_500_SEARCH)
+                .append(START_PARAMS)
+                .append(DEV_ID_PARAM)
+                .append(DEV_ID);
 
         if (limit > 0 && limit < 500)
-            builder.append(AND).append(LIMIT_PARAM).append(offset).append(COMMA).append(limit);
+            builder.append(AND)
+                    .append(LIMIT_PARAM)
+                    .append(offset)
+                    .append(COMMA)
+                    .append(limit);
 
         return readXML(builder.toString());
     }

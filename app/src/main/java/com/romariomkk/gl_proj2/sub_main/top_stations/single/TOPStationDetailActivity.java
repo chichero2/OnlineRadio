@@ -1,4 +1,4 @@
-package com.romariomkk.gl_proj2.top_stations.single;
+package com.romariomkk.gl_proj2.sub_main.top_stations.single;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.romariomkk.gl_proj2.R;
-import com.romariomkk.gl_proj2.top_stations.StationModel;
+import com.romariomkk.gl_proj2.sub_main.top_stations.StationModel;
 
 public class TOPStationDetailActivity extends AppCompatActivity{
+
+    public final static String STATION_EXTRA = "station_item";
 
     CollapsingToolbarLayout collapseToolbar;
 
@@ -27,7 +29,7 @@ public class TOPStationDetailActivity extends AppCompatActivity{
         initInstances();
 
         Intent intent = getIntent();
-        StationModel station = (StationModel) intent.getSerializableExtra("station_item");
+        StationModel station = (StationModel) intent.getSerializableExtra(STATION_EXTRA);
 
         stationName.setText(station.getStationName());
         stationDescription.setText(getString(R.string.currentAud, station.getStationGenre()));

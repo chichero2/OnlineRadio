@@ -1,4 +1,4 @@
-package com.romariomkk.gl_proj2;
+package com.romariomkk.gl_proj2.main;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -6,9 +6,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.romariomkk.gl_proj2.country.NowPlayingFragment;
-import com.romariomkk.gl_proj2.show.GenresFragment;
-import com.romariomkk.gl_proj2.top_stations.TOPStationsFragment;
+import com.romariomkk.gl_proj2.R;
+import com.romariomkk.gl_proj2.sub_main.genres.GenresFragment;
+import com.romariomkk.gl_proj2.sub_main.now_playing.NowPlayingFragment;
+import com.romariomkk.gl_proj2.sub_main.top_stations.TOPStationsFragment;
 
 public class MainActivity extends AppCompatActivity {
 

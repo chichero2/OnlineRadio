@@ -10,12 +10,12 @@
         android:layout_height="wrap_content"
         android:scaleType="centerCrop" />
 
-    <com.romariomkk.gl_proj2.station_recycler_view.CustomItem
+    <com.romariomkk.gl_proj2.sub_main.top_stations.station_recycler_view.CustomItem
         android:id="@+id/customItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@drawable/head_item"
+        android:background="@drawable/head_list_item"
         android:paddingBottom="@dimen/layout_padding"
         android:paddingEnd="12dp"
         android:paddingStart="12dp"

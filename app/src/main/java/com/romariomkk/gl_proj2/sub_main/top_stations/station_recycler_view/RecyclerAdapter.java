@@ -1,4 +1,4 @@
-package com.romariomkk.gl_proj2.station_recycler_view;
+package com.romariomkk.gl_proj2.sub_main.top_stations.station_recycler_view;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.romariomkk.gl_proj2.R;
-import com.romariomkk.gl_proj2.top_stations.StationModel;
+import com.romariomkk.gl_proj2.sub_main.top_stations.StationModel;
 
 import java.util.ArrayList;
 

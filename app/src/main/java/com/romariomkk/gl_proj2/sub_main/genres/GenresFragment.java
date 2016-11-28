@@ -1,4 +1,4 @@
-package com.romariomkk.gl_proj2.show;
+package com.romariomkk.gl_proj2.sub_main.genres;
 
 
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.romariomkk.gl_proj2.R;
-import com.romariomkk.gl_proj2.station_recycler_view.RecyclerAdapter;
+import com.romariomkk.gl_proj2.sub_main.top_stations.station_recycler_view.RecyclerAdapter;
 
 import java.util.ArrayList;
 

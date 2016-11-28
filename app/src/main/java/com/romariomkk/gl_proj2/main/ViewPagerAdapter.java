@@ -1,4 +1,4 @@
-package com.romariomkk.gl_proj2;
+package com.romariomkk.gl_proj2.main;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

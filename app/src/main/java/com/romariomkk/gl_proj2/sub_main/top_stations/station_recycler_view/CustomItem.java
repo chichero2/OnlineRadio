@@ -1,4 +1,4 @@
-package com.romariomkk.gl_proj2.station_recycler_view;
+package com.romariomkk.gl_proj2.sub_main.top_stations.station_recycler_view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.romariomkk.gl_proj2.R;
-import com.romariomkk.gl_proj2.top_stations.StationModel;
+import com.romariomkk.gl_proj2.sub_main.top_stations.StationModel;
 
 /**
  * Created by romariomkk on 17.11.2016.
