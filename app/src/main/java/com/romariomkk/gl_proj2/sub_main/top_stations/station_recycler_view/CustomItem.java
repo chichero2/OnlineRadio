@@ -32,22 +32,14 @@ public class CustomItem extends RelativeLayout {
         initInstances(attrs);
     }
 
-    void setStation(StationModel st, int pos){
-        StationModel station = st;
+    void setStation(StationModel st, int pos) {
         int position = pos;
 
         idText.setText(Integer.toString(position + 1));
-        smallImage.setImageResource(station.getImageID());
-        mainText.setText(station.getStationName());
-        subText.setText(station.getStationGenre());
+        smallImage.setImageResource(st.getImageID());
+        mainText.setText(st.getStationName());
+        subText.setText(st.getStationGenre());
     }
-
-    void initInflater(){
-        LayoutInflater inflater = (LayoutInflater) getContext()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.single_station_item_view, this, true);
-    }
-
 
     private void initInstances(AttributeSet attrs) {
         initInflater();
@@ -65,6 +57,12 @@ public class CustomItem extends RelativeLayout {
             mainText.setTextColor(mainTextColor);
             subText.setTextColor(subTextColor);
         }
+    }
+
+    private void initInflater() {
+        LayoutInflater inflater = (LayoutInflater) getContext()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater.inflate(R.layout.single_station_item_view, this, true);
     }
 
     private void initFields() {

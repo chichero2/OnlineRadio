@@ -7,19 +7,13 @@ import java.io.Serializable;
  */
 public class StationModel implements Serializable {
 
-    private int internalId;
     private String stationId;
     private String stationName;
     private String stationGenre;
     private int imageID;
     private String currentAudience;
 
-    public StationModel(int internId, String id, String name, String genre, int imageId) {
-        this(internId, id, name, genre, imageId, "0");
-    }
-
-    public StationModel(int internId, String id, String name, String genre, int imageId, String curUsers) {
-        internalId = internId;
+    public StationModel( String id, String name, String genre, int imageId, String curUsers) {
         stationId = id;
         stationName = name;
         stationGenre = genre;
@@ -37,10 +31,6 @@ public class StationModel implements Serializable {
 
     public Integer getImageID() {
         return imageID;
-    }
-
-    public int getInternalId() {
-        return internalId;
     }
 
     public String getStationId() {

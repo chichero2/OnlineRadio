@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.romariomkk.gl_proj2.R;
+import com.romariomkk.gl_proj2.caching.CacheManager;
+import com.romariomkk.gl_proj2.caching.SQLiteHelper;
 import com.romariomkk.gl_proj2.sub_main.top_stations.StationModel;
 
 import org.w3c.dom.NamedNodeMap;
@@ -17,17 +19,13 @@ import java.util.ArrayList;
  * Created by romariomkk on 18.11.2016.
  */
 public class RequestManager {
+    private final String TAG = RequestManager.class.getSimpleName();
 
     public class AsyncTop500Extraction extends AsyncTask<Integer, Void, ArrayList<StationModel>> {
         private final String TAG = AsyncTop500Extraction.class.getSimpleName();
 
         @Override
         protected ArrayList<StationModel> doInBackground(Integer... ints) {
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                Log.e(TAG, "Waiting..", e);
-            }
 
             NodeList xmlList = xmlManager.getTopStations(ints[0], ints[1]);
 
@@ -38,15 +36,16 @@ public class RequestManager {
                 stations.add(model);
             }
 
-            //cacheManager.writeStations(stations);
+            cacheManager.writeStations(stations);
+            cacheManager.updateLastEditTimeForTable(SQLiteHelper.TOP_500_STATIONS);
 
+            Log.d(TAG, "Stations extracted asynchronously");
             return stations;
         }
 
         private StationModel createStation(int index, Node obj) {
             NamedNodeMap attrs = obj.getAttributes();
-            return new StationModel(index,
-                    attrs.getNamedItem("id").getNodeValue(),
+            return new StationModel(attrs.getNamedItem("id").getNodeValue(),
                     attrs.getNamedItem("name").getNodeValue(),
                     attrs.getNamedItem("genre").getNodeValue(),
                     index == 0 ? R.drawable.img1 : R.drawable.img2,
@@ -78,6 +77,7 @@ public class RequestManager {
     XMLManager xmlManager = new XMLManager();
     WeakReference<OnLoadListener> listener;
     AsyncTop500Extraction task = new AsyncTop500Extraction();
+    CacheManager cacheManager = new CacheManager();
 
     public void requestTopStations(OnLoadListener listener) {
         this.listener = new WeakReference<>(listener);
@@ -89,11 +89,13 @@ public class RequestManager {
     }
 
     private void requestTopStations(int offset, int limit) {
-        ArrayList<StationModel> stations = null;// = cacheManager.getStations();
-        if (stations == null) { //for cache managing utils
+        ArrayList<StationModel> stations = cacheManager.getStations();
+        if (stations == null || cacheManager.isCacheOlderThan(1, SQLiteHelper.TOP_500_STATIONS)) {
             if (task.getStatus() != AsyncTask.Status.RUNNING) {
+                Log.d(TAG, "HTTP request started");
                 task = new AsyncTop500Extraction();
                 task.execute(offset, limit);
+                Log.d(TAG, "HTTP extraction executed");
             }
         } else {
             OnLoadListener l = listener.get();
@@ -102,4 +104,5 @@ public class RequestManager {
             }
         }
     }
+
 }

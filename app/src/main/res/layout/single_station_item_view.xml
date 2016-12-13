@@ -16,10 +16,10 @@
         android:id="@+id/small_image"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="8dp"
         android:layout_toEndOf="@id/idNum"
-        android:layout_toRightOf="@id/idNum"
-        android:layout_centerVertical="true"/>
+        android:layout_toRightOf="@id/idNum" />
 
     <LinearLayout
         android:id="@+id/linLayout"
@@ -37,15 +37,24 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/subText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/light_black"/>
+            android:textColor="@color/light_black"
+            android:textSize="16sp" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/itemContextMenuButton"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/dots_vert_black"
+        android:clickable="true"/>
 
 </merge>

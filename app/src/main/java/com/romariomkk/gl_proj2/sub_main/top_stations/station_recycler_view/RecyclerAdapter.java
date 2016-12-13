@@ -23,21 +23,26 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     Context context;
     ArrayList<StationModel> stations;
     private OnItemClickListener clickListener;
-
+    private OnMenuItemClickedListener menuClickListener;
 
     public interface OnItemClickListener{
         void onItemClicked(StationModel station);
+    }
+    public interface OnMenuItemClickedListener{
+        void onMenuItemClicked(View view, StationModel station);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView image;
         CustomItem item;
+        ImageView itemContextMenu;
 
         public ViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.image);
             item = (CustomItem) itemView.findViewById(R.id.customItem);
+            itemContextMenu = (ImageView) itemView.findViewById(R.id.itemContextMenuButton);
         }
 
         void setModel(StationModel station, int position){
@@ -53,6 +58,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                     clickListener.onItemClicked(station);
                 }
             });
+
+            itemContextMenu.setOnClickListener(view -> {
+                if (menuClickListener != null){
+                    menuClickListener.onMenuItemClicked(view, station);
+                }
+            });
         }
     }
 
@@ -65,6 +76,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public void setOnItemClickListener(OnItemClickListener listener){
         clickListener = listener;
     }
+    public void setOnItemMenuClickListener(OnMenuItemClickedListener listener) { menuClickListener = listener; }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -96,4 +108,5 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public int getItemCount() {
         return stations.size();
     }
+
 }

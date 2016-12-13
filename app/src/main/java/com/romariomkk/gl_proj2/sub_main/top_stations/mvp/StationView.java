@@ -10,5 +10,5 @@ import java.util.ArrayList;
 public interface StationView {
 
     void showTopStations(ArrayList<StationModel> stations);
-
+    void notifyContactAdded(String notification);
 }
